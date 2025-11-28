@@ -16,7 +16,7 @@ fi
 sudo pacman -Sy
 
 # 3. Instal paket 32-bit pendukung gaming
-sudo pacman -S --noconfirm lib32-mesa lib32-vulkan-intel lib32-freetype2
+sudo pacman -S --noconfirm lib32-mesa lib32-vulkan-intel lib32-vulkan-mesa-layers lib32-freetype2
 
 # 4. Konfigurasi mkinitcpio
 # Tambahkan i915 ke MODULES jika belum ada
