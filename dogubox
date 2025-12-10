@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ ! -d "venv" ]; then
+  echo "Run app.py with Python from venv..."
+  python3 -m venv venv
+fi
+
+# Run app.py with Python from venv
+venv/bin/python src/app.py
