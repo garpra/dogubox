@@ -15,11 +15,3 @@ cd dogubox
 ./dogubox
 ```
 
-## Structure
-
-```bash
-dogubox/
-├── dogubox                 # Main wrapper script
-├── scripts/                # Supporting scripts
-└── src/                    # Custom tools
-```

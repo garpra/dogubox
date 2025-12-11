@@ -1,9 +1,49 @@
 #!/bin/bash
 
-if [ ! -d "venv" ]; then
-  echo "Run app.py with Python from venv..."
-  python3 -m venv venv
+SCRIPTS_DIR="scripts"
+
+title_case() {
+  local out=""
+  for word in $1; do
+    first=${word:0:1}
+    rest=${word:1}
+    out+="$(tr '[:lower:]' '[:upper:]' <<<"$first")${rest,,} "
+  done
+  echo "${out::-1}"
+}
+
+scripts=("$SCRIPTS_DIR"/*)
+clear
+echo
+echo "List Scripts:"
+echo
+i=1
+for script in "${scripts[@]}"; do
+  name=$(basename "$script")
+  name="${name%.sh}"
+  name="${name//-/ }"
+  name="$(title_case "$name")"
+  echo "$i. $name"
+  ((i++))
+done
+
+echo
+read -rp "Select script (number): " choice
+
+# Validasi angka
+if ! [[ "$choice" =~ ^[0-9]+$ ]]; then
+  echo "Input invalid, please enter a number"
+  exit 1
 fi
 
-# Run app.py with Python from venv
-venv/bin/python src/app.py
+# Validasi range
+if ((choice < 1 || choice > ${#scripts[@]})); then
+  echo "Script number not available"
+  exit 1
+fi
+
+clear
+
+selected_script="${scripts[choice - 1]}"
+echo "Run: $(basename "$selected_script")"
+bash "$selected_script"
